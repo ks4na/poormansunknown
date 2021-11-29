@@ -1,0 +1,72 @@
+---
+sidebar_position: 1
+title: 安装
+---
+
+## 创建 docusaurus 站点
+
+```sh
+npx create-docusaurus@latest [name] [template]
+# 其中 name 为即将创建的站点项目名，template 为模板名，推荐使用 "classic"
+
+# 创建具有 Typescript 支持的站点
+npx create-docusaurus@latest [name] [template] --typescript
+
+# 创建站点时跳过依赖安装
+npx create-docusaurus@latest [name] [template] --skip-install
+```
+
+## 项目目录结构
+
+假设选择的是 `classic` 模板，且站点名为 `my-website`，则 `my-website` 目录下将会生成类似如下结构的文件树：
+
+```txt
+my-website
+├── blog
+│   ├── 2019-05-28-hola.md
+│   ├── 2019-05-29-hello-world.md
+│   └── 2020-05-30-welcome.md
+├── docs
+│   ├── doc1.md
+│   ├── doc2.md
+│   ├── doc3.md
+│   └── mdx.md
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── styles.module.css
+│       └── index.js
+├── static
+│   └── img
+├── docusaurus.config.js
+├── package.json
+├── README.md
+├── sidebars.js
+└── yarn.lock
+```
+
+其中：
+
+- `/blog/` - 存放博客文件；
+- `/docs/` - 存放文档文件；
+- `/src/` - 存放非文档文件，例如页面或者 React 组件文件；
+  - `/src/pages/` - 存放页面文件；
+- `/static/` - 静态文件目录。打包项目时，其中的内容会被直接复制到 `/build/` 目录下；
+- `/docusaurus.config.js` - docusaurus 的配置文件；
+- `/sidebar.js` - 用于自定义文档的侧边栏。
+
+## 运行开发服务器
+
+```sh
+cd my-website
+npm start
+```
+
+## 打包项目
+
+```sh
+npm run build
+```
+
+> 打包后的文件内容会生成到 `/build/` 文件夹下。
