@@ -1,0 +1,62 @@
+---
+sidebar_position: 3
+title: TypeScript Support
+---
+
+## 为配置文件添加类型定义
+
+`docusaurus` 的配置文件中无法使用 TypeScript 类型文件，除非自行编译该文件为 js 文件。官网推荐使用 jsDoc 形式的类型定义。
+
+```js {3,10,20,34}
+// @ts-check
+
+/** @type {import('@docusaurus/types').Plugin} */
+function MyPlugin(context, options) {
+  return {
+    name: 'my-plugin',
+  }
+}
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  title: 'Docusaurus',
+  tagline: 'Build optimized websites quickly, focus on your content',
+  organizationName: 'facebook',
+  projectName: 'docusaurus',
+  plugins: [MyPlugin],
+  presets: [
+    [
+      '@docusaurus/preset-classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          path: 'docs',
+          sidebarPath: 'sidebars.js',
+        },
+        blog: {
+          path: 'blog',
+          postsPerPage: 5,
+        },
+      }),
+    ],
+  ],
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      colorMode: {
+        defaultMode: 'dark',
+      },
+      navbar: {
+        hideOnScroll: true,
+        title: 'Docusaurus',
+        logo: {
+          alt: 'Docusaurus Logo',
+          src: 'img/docusaurus.svg',
+          srcDark: 'img/docusaurus_keytar.svg',
+        },
+      },
+    }),
+}
+
+module.exports = config
+```
