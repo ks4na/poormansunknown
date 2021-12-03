@@ -1,0 +1,70 @@
+---
+sidebar_position: 1
+title: Creating Pages
+---
+
+docusaurus 的 Pages 功能由 `@docusaurus/plugin-content-pages` 提供，可以使用 React 组件或者 Markdown 文件来创建页面。
+
+> Pages 功能没有侧边导航栏，只有 Docs 才有。
+
+> 更多详细设置可以查看 [Pages Plugin API Reference 文档](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages) 。
+
+## 创建一个 React 页面
+
+在 `/src/pages/` 目录下创建 `react` 组件文件，这些页面将会作为页面展示，访问地址即为该文件的名称。  
+例如，创建 `/src/pages/HelloReact.tsx`
+
+```tsx title="/src/pages/HelloReact.tsx"
+import React, { FC } from 'react'
+import Layout from '@theme/Layout'
+
+const HelloReact: FC = () => {
+  return (
+    <Layout title="Hello React">
+      <div>Hello React!</div>
+    </Layout>
+  )
+}
+
+export default HelloReact
+```
+
+访问 `http://localhost:3000/HelloReact` 即可看到该页面。
+
+## 创建一个 Markdown 页面
+
+在 `/src/pages/`目录下创建 `markdown` 文件，这些页面同样会作为页面展示。  
+例如，创建 `/src/pages/HelloMarkdown.mdx`
+
+```mdx title="/src/pages/HelloMarkdown.mdx"
+---
+title: my hello page title
+description: my hello page description
+hide_table_of_contents: true
+---
+
+# Hello
+
+How are you?
+```
+
+## 路由映射方式
+
+推荐使用 `/src/pages/support/index.js` 代替 `/src/pages/support.js` 的方式来创建页面，因为这样可以将 `support` 页面相关的资源都放在 `/src/pages/support` 目录下。  
+另外， 任何以 `_` 开头的 js、markdown 文件都会被忽略，不会生成对应的页面。
+
+```sh
+my-website
+├── src
+│   └── pages
+│       ├── styles.module.css
+│       ├── index.js
+|       ├── _ignored.js
+│       └── support
+│           ├── index.js
+│           └── styles.module.css
+.
+```
+
+> 如果想要创建可重用的组件文件，可以使用 [exclude 选项](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages#configuration)
+> 来自定义（默认情况下， `_` 开头的文件、测试文件（`.test.js`）以及 `__test__`目录下的文件都会被忽略）。
