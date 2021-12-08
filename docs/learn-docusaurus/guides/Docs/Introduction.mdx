@@ -1,0 +1,63 @@
+---
+sidebar_position: 2
+title: Docs Introduction
+---
+
+`docs` 特性提供了以目录层级方式组织 markdown 文件的方法。
+
+:::info
+更多详细配置参考 [Docs Plugin API Reference 文档](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs)。
+:::
+
+## 文档 ID
+
+每一个文档都有一个唯一 ID，默认为该文件相对于根目录的路径名（不带拓展名）。  
+例如, `greeting.md` 的 ID 就是 `greeting`, `guide/hello.md` 的 ID 是 `guide/hello`。
+
+```sh
+website # Root directory of your site
+└── docs
+   ├── greeting.md
+   └── guide
+      └── hello.md
+```
+
+:::info
+文档 ID 除了用于生成 URL 路径，还可以用于 `sidebars.js` 文件中以配置方式指定侧边菜单栏。
+:::
+
+可以在文档顶部 meta 数据声明的地方自定义文档 ID。
+
+```mdx
+---
+id: part1
+---
+```
+
+:::info
+如果想要自定义文档对应的 URL 地址，可以添加 `slug` 属性来指定 URL（`slug` 默认值为 `id` 值）。
+
+```mdx
+---
+id: part1
+slug: part1.html
+---
+```
+
+> `slug` 可以指定为相对路径或者绝对路径形式。
+>
+> - 绝对路径形式： `slug: /mySlug`、 `slug: /` ...
+> - 相对路径形式： `slug: mySlug` 、 `slug: ./../mySlug` ...
+
+:::
+
+## docs 作为主页
+
+如果想要将某个文档作为主页，并且想要使用类似如下的路径 `https://docusaurus.io/docs/`，可以使用如下方式：
+
+```mdx
+---
+id: my-home-doc
+slug: /
+---
+```
