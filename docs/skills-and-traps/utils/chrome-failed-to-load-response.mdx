@@ -1,0 +1,13 @@
+---
+title: chrome failed to load response data when preserve log
+sidebar_position: 1
+---
+
+当 `devtools` 中选中 `preserve log` 选项后，可以实现网页跳转后也不会丢失 `console.log` 信息，但是 `network` tab 页下之前页面的请求却无法查看，提示 `failed to load response data`:
+
+![failed to load response data when preserve log](/img/skills-and-traps/utils/failed-to-load-response-data-when-preseve-log.png)
+
+一个解决方法是：  
+添加 `beforeunload` 事件，页面即将跳转前会进入该事件的断点，此时可以查看到 `network` tab 页下即将 `failed to load response data` 的请求返回数据信息。
+
+![workaround for failed to load response data](/img/skills-and-traps/utils/workaround-for-failed-to-load-response-data.png)
